@@ -1,0 +1,356 @@
+{% extends 'modmain/base.html' %}
+{% load static %}
+{% load notifications_tags %}
+{% block content %}
+
+
+
+
+     <!-- ======= Portfolio Section ======= -->
+     
+    <section id="portfolio" class="section-bg">
+
+ {% if messages %}
+            {% for message in messages %}
+              <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+              </div>
+            {% endfor %}
+          {% endif %}
+
+   
+
+<section id="clients" >
+  <header class="section-header mt-4" >
+          <h3 style="font-family:Anurati-Regular;color: white" id="mob_title">Streams</h3>
+        </header>
+<div class="container video-container">
+    <div class="row">    
+        <div class="col-md-6 ">
+            <div class="card" style="border-radius:10px">
+                <div class="card-image">
+                    <div class="embed-responsive embed-responsive-16by9" style="border-radius:10px">
+    <iframe
+    src="https://player.twitch.tv?autoplay=true&channel=riotgames&controls=true&height=100%25&layout=video&migration=true&muted=false&parent=127.0.0.1&preload=auto&t=0&width=100%25"
+     height="315"
+    width="560"
+    frameborder="0"
+    scrolling="no"
+    allowfullscreen="true">
+</iframe>
+
+</div>
+
+                    
+                </div><!-- card image -->
+                
+                {% comment %} <div class="card-content juked149">
+                    <span class="card-title">Will my credits transfer?</span>                    
+                    
+                </div><!-- card content --> {% endcomment %}
+                
+                
+            </div>
+        </div>
+
+        
+        <div class="col-md-6 ">
+            <div class="card" style="border-radius:10px">
+                <div class="card-image">
+                    <div class="embed-responsive embed-responsive-16by9" style="border-radius:10px">
+    <iframe
+    src="https://player.twitch.tv?autoplay=true&channel=esl_csgo&controls=false&height=100%25&layout=video&migration=true&muted=false&parent=127.0.0.1&preload=auto&t=0&width=100%25"
+     height="315"
+    width="560"
+    frameborder="0"
+    scrolling="no"
+    allowfullscreen="true">
+</iframe>      
+{% comment %} <iframe width="560" height="315" src="https://www.youtube.com/embed/VNYwx5KBoYY" frameborder="0" allowfullscreen></iframe> {% endcomment %}
+</div>
+                    
+                </div><!-- card image -->           
+                {% comment %} <div class="card-content juked149">
+                    <span class="card-title">Do I have to live on campus?</span>                    
+                </div><!-- card content -->               {% endcomment %}
+            </div>
+        </div>
+    </div>
+
+       
+
+    
+     
+    </div>
+
+
+</div>
+</section>
+
+
+
+<section id="clients" class="mt-5">
+  <header class="section-header mt-4" >
+          <h3 style="font-family:Anurati-Regular;color: white"  id="mob_title">Top Games</h3>
+        </header>
+        <div class="owl-carousel clients-carousel mb-4">
+
+{% for li  in glist  %}
+<div class="profile-card-2">
+<a href="{% url 'games' li.id %}"> 
+<img src="{{li.image.url}}" class="img img-responsive">
+   
+        <div class="profile-name">{{li.name}}</div>
+        <div class="profile-username">#LiVeyOuNgLiVeFrEe</div>
+        <div class="profile-icons"><a href="#"><i class="fa fa-facebook"></i></a><a href="#"><i class="fa fa-twitter"></i></a><a href="#"><i class="fa fa-linkedin"></i></a></div>
+   </a>
+    </div>
+    
+      {% endfor %}    
+
+      </div>
+
+
+    </section>
+
+
+
+
+
+
+
+
+
+
+
+
+{% comment %} 
+<section >
+
+
+<div class="profile-card-2"><img src="http://envato.jayasankarkr.in/code/profile/assets/img/profile-2.jpg" class="img img-responsive">
+        <div class="profile-name">JOHN DOE</div>
+        <div class="profile-username">@johndoesurname</div>
+        <div class="profile-icons"><a href="#"><i class="fa fa-facebook"></i></a><a href="#"><i class="fa fa-twitter"></i></a><a href="#"><i class="fa fa-linkedin"></i></a></div>
+    </div>
+
+
+    
+
+</section> {% endcomment %}
+
+      <!-- ======= Portfolio Section ======= -->
+   
+       
+
+
+
+<section id="contact">
+<header class="section-header">
+          <h3 class="section-title" style="font-family:Anurati-Regular;color: white"  id="mob_title">Tournaments</h3>
+        </header>
+<div class="container-fluid" >
+
+  <div class="row join_row" >
+{% for li in list %}
+{% if li.is_active %}
+
+{% else %}
+
+ <div class="col-md-3 join_card move" >
+    <div class="card  mb-3  join_card_inside" >
+  <div class="card-header rounded-top" style="background-color:black">
+  <div class="row inside_row">
+    <div class="col-md-5 ">
+    <span style=" font-size: 13px;color:white;font-weight:bold">{{li.game_id}}</span>
+    </div>
+    <div class="col-md-7 game_count" style="text-align:right"><i class="icofont-game " style="color: red"></i><span style="color: white;font-weight:bold"> IND</span></div>
+    
+  </div></div>
+ 
+  <div class="card-body " style="padding: unset">
+  
+    <img class="card-img" src="{{li.image.url}}" alt="Card image cap" style="max-height: 200px;min-height:200px;">
+  </div>
+  <div class="card-footer  rounded-bottom" style="background-color:black">
+    <div class="row platform">
+      <div class="col-md-7 platform_name"><span style="color: #C0C0C0;font-weight:bold;font-size:10px">{{li.platform}}</span></div>
+       <div class="col-md-5 vs" style="text-align:right"><span style="color: #C0C0C0;font-weight:bold;font-size:10px">{{li.gametype}}</span></div>
+      
+    </div>
+    <div class="row mt-2 mb-2">
+      <div class="col-md-12" style="max-height: 20px;min-height:20px;"><span style="color: white;font-weight:bold;">{{li.name}}</span></div>
+    </div>
+    <div class="row mt-3 pt-3">
+      <div class="col-md-8"><span style="color: #C0C0C0;font-weight:bold;font-size:10px">{{li.date_of_tournament}}</span></div>
+       
+         <div class="col-md-4 join_button" style="text-align:right"><a href="{% url 'tournament_details' li.id %}" style="font-weight: bold" class="btn btn-sm btn-primary">JOIN</a></div>
+    </div>
+  </div>
+</div>
+</div>
+
+
+{% endif %}
+   
+        
+{% endfor %}
+       </div>
+</div>
+</section>
+       
+
+
+        
+
+       
+
+     
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    <!-- ======= Our Clients Section ======= -->
+    <!-- End Our Clients Section -->
+
+
+    
+
+
+
+      <section id="clients">
+
+      <div class="container" data-aos="zoom-in">
+
+        <header class="section-header">
+          <h3 style="font-family:Anurati-Regular;color:white"  id="mob_title">Featured Events</h3>
+        </header>
+
+        <div class="owl-carousel clients-carousel">
+
+         <div class="card cardslider card-3 ">
+         <img id="img1" src="{% static 'modmain/img/epl11.jpg' %}">
+          <div class="portfolio-wrap">
+           
+
+            <div class="portfolio-info">
+            <h6></h6>
+              
+            </div>
+          </div>
+          
+        </div>
+
+         <div class="card cardslider card-3 ">
+         <img id="img1" src="{% static 'modmain/img/epl11.jpg' %}">
+          <div class="portfolio-wrap">
+           
+
+            <div class="portfolio-info">
+                     <h6</h6>
+              
+            </div>
+          </div>
+          
+        </div>
+         <div class="card cardslider card-3 ">
+         <img id="img1" src="{% static 'modmain/img/epl11.jpg' %}">
+          <div class="portfolio-wrap">
+           
+
+            <div class="portfolio-info">
+                    <h6></h6>
+              
+            </div>
+          </div>
+          
+        </div>
+         <div class="card cardslider card-3 ">
+         <img id="img1" src="{% static 'modmain/img/epl11.jpg' %}">
+          <div class="portfolio-wrap">
+           
+
+            <div class="portfolio-info">
+                     <h6></h6>
+              
+            </div>
+          </div>
+          
+        </div>
+        
+        </div>
+
+      </div>
+    </section>
+
+
+    <section id="match">
+
+    
+        <header class="section-header">
+          <h3 style="font-family:Anurati-Regular;letter-spacing: 5px;color: white"  id="mob_title">Live Events to watch</h3>
+        </header>
+     
+    <div class="container-fluid">
+    
+     {% for li  in list  %}
+     {% if li.is_active %}
+      <a href="{% url 'tournament_details' li.id %}"> 
+     <div class="schedule_match match  p-3 mb-4 container" style="border-style: solid;border-color: white;">
+    
+     <div class="row">
+       <div class="col-lg-2 nk mb-1">{{li.game_id}}</div>
+     <div class="col-lg-6 nm mb-1" style="color:white">{{li.name}}</div>
+     <div class="col-lg-2 nn mb-1" style="color:white">Now Playing</div>
+     <div class="col-lg-2 nj mb-1 ">{{li.gametype}}</div>
+    
+    
+     </div>
+     </div>
+     </a>
+     {% endif %}
+{% endfor %}
+
+     
+
+ 
+
+    </section>
+
+
+
+    
+
+<section>
+</section>
+
+
+ <script src= "https://player.twitch.tv/js/embed/v1.js"></script>
+ <script type="text/javascript">
+  var options = {
+     width="560",
+     height="315",
+    video:762208920,
+    // only needed if your site is also embedded on embed.example.com and othersite.example.com 
+    parent: ["127.0.0.1"],
+    controls: false
+  };
+  var player = new Twitch.Player("viddiv", options);
+  player.setVolume(0.9);
+</script>
+
+    
+{% endblock content %}

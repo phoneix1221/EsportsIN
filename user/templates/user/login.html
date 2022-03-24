@@ -1,0 +1,66 @@
+  
+{% extends 'modmain/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+{% if user.is_authenticated %}
+<section id="regform" style="margin-top:120px">
+<h1>You are already logged in</h1>
+</section>
+<a href="{% url 'modmain-home' %}">Back</a>
+
+{% else %}
+<section id="regform">
+
+ <div class="container-fluid juked" style="background-image:"{% static 'modmain/img/Juked_Background.jpg' %}"" >
+{% if messages %}
+            {% for message in messages %}
+              <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+              </div>
+            {% endfor %}
+          {% endif %}
+
+<div class="container pt-3">
+
+  <div class="row justify-content-sm-center mr-n4 ml-n4">
+    <div class="col-sm-8 col-md-6 login_form_margin" >
+
+      <div class="card cardreg border-info text-center "style="background-color:transparent">
+        <div class="card-header ">
+         <h4 style="color:white;font-family:Anurati-Regular;">WELCOME BACK</h4>
+        </div>
+        <div class="card-body pr-0 pl-0">
+        <form method="POST">
+            {% csrf_token %}
+            <fieldset class="form-group" style="color:white">
+                {{ form|crispy }}
+            </fieldset>
+            <div class="form-group">
+                <button class="btn  btn-block login-btn " type="submit"><span style="color:white">Login</span></button>
+            </div>
+        </form>
+        <div class="border-top pt-3">
+            <small class="text-muted">
+                Need An Account? <a class="ml-2" href="{% url 'register-url' %}">Sign Up Now</a>
+            </small>
+        </div>
+ </div>
+      </div>
+     
+    </div>
+  </div>
+</div>
+
+
+  </div>
+</div>
+</div>
+</section>
+
+{% endif %}
+
+
+
+{% endblock content %}

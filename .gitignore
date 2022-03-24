@@ -1,0 +1,7 @@
+/esp1/__pycache__/
+/modmain/__pycache__/
+/user/__pycache__/
+twitch_cred.txt
+.vscode/
+db.sqlite3
+epsort.rar

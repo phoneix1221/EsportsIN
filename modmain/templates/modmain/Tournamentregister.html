@@ -1,0 +1,30 @@
+{% extends 'modmain/base.html' %}
+{% load static %}
+{% block content %}
+{% load crispy_forms_tags %}
+{% if is_registered %}
+
+{% else %}
+<div class="container col-sm-4 " >
+
+<div class="card container-fluid p-5 card shadow border border-white" style="background-color: black;">
+<img class="card-img-top" src="{{tournament.image.url}}" height="200px" alt="Card image cap">
+  <div class="card-body">
+  <span class="text-center alert-dark font-weight-bold " style="font-size:2rem;color:white;font-weight: 600;"><p>{{tournament.name}}</p></span>
+   <form method="POST">
+            {% csrf_token %}
+            <fieldset class="form-group text-light text-uppercase font-weight-light">
+                {{ form|crispy }}
+            </fieldset>
+            <div class="form-group container">
+                <button class="btn  btn-block login-btn  " type="submit" style="color:white;font-weight: 600;"><span style="color:white">Participate</span></button>
+            </div>
+        </form>
+  </div>
+</div>
+
+
+ 
+{% endif %} 
+</div>       
+{% endblock content %}

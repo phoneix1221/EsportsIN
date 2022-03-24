@@ -1,0 +1,94 @@
+{% extends 'modmain/base.html' %}
+{% load static %}
+{% block content %}
+ <div class="modal fade bd-example-modal-lg  " tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="min-height: 600px;">
+
+  <div class="modal-dialog modal-lg " style="background: url("modmain/img/ghost.jpg");">
+
+    <div class="modal-content">
+     <div class="container-fluid fav-model">
+     <center>
+        
+     <h2 class="mt-3" style="text-align:center; color: #000;font-weight: bolder;">Setup Favorites</h2>
+   
+      <p>Select your favorite game(s) from the list below.</p>
+   <div>
+   <div class="container add1"></div>
+   <h3 style="text-align:left;color: #000;font-weight: bolder;"><i class="fa fa-gamepad"></i>  Favorite Games</h3>
+   <h6 class="ml-5" style="text-align:left">Select your favorite game(s) from the list below.</h6>
+
+   
+   </div>
+
+  
+     <div class="row" >
+   
+     {%  for i in data %}
+  
+        <div class="col-md-4 ">
+        <button class="btn    btn-sm btn1" id='{{i.id}}'>
+        <div class=" juked176">
+        <div class=" juked177 " style="background-image: url({{i.image.url}});" ></div>
+        <div class="juked178" id='{{i.id}}a'>{{i.name}}</div>
+        </div>
+        </button>
+        </div> 
+     
+     
+  
+
+
+{% endfor %} 
+                                                                                                            
+</div>
+
+         
+
+         
+
+
+         
+
+
+         
+
+
+       
+
+       
+      
+    
+       </div>
+      
+     <div class="modal-footer">
+     <div class="container">
+     <div class="row">
+     <div class="col-md-3 offset-6">  <button style="background-color:rgb(5, 199, 204);" type="button" class="btn  btn-block">Cancel</button></div>
+     <div class="col-md-3 "> <button style="background-color:rgb(157, 12, 94);;" type="button" class="btn btn-success btn-block saverr" data-dismiss="modal">Save</button></div>
+    
+      
+       
+        </div>
+        </div>
+      </div>
+       </div>
+       
+
+       </center>
+       
+     </div>
+
+    
+  </div>
+  
+</div>
+
+    </section>
+
+{% endblock content %}
+
+ {% comment %} <script>
+ $(window).on('load',function(){
+        $('.bd-example-modal-lg').modal('show');
+    });
+</script> {% endcomment %}

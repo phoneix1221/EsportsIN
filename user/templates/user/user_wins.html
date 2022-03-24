@@ -1,0 +1,38 @@
+{% extends 'modmain/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+ 
+ 
+    <section id="match">
+
+    
+        <header class="section-header">
+          <h3 style="font-family:Anurati-Regular;letter-spacing: 5px;color: white">Winning Tournaments</h3>
+        </header>
+     
+    <div class="container-fluid">
+    
+     {% for li  in data  %}
+    
+      <a href="{% url 'tournament_details' li.id %}"> 
+     <div class="schedule_match match  p-3 mb-4 container" style="border-style: solid;border-color: white;">
+    
+     <div class="row">
+       <div class="col-lg-2 nk mb-1">{{li.game_id}}</div>
+     <div class="col-lg-5 nm mb-1" style="color:white">{{li.name}}</div>
+     <div class="col-lg-3 nn mb-1" style="color:white">{{li.date_of_tournament}}</div>
+     <div class="col-lg-2 nj mb-1 ">{{li.gametype}}</div>
+    
+    
+     </div>
+     </div>
+     </a>
+{% endfor %}
+
+     
+
+ 
+
+    </section>
+{% endblock content %}

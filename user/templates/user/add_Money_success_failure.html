@@ -1,0 +1,77 @@
+
+
+{% extends 'modmain/base.html' %}
+{% load static %}
+{% block head %}
+<link href="{% static 'modmain/css/main.css' %}" rel="stylesheet">
+{% endblock %}
+
+
+{% block content %}
+
+
+{% ifequal result "success" %}
+<section>
+<div class="container container_success mt-3">
+  <div class="printer-top"></div>
+    
+  <div class="paper-container">
+    <div class="printer-bottom"></div>
+
+    <div class="paper">
+      <div class="main-contents">
+        <div class="success-icon p-3">&#10004;</div>
+        <div class="success-title">
+          Payment Complete
+        </div>
+        <div class="success-description p-6">
+         <img src="{% static 'modmain/img/animation_500_kh1ok5r5.gif' %}" alt="" width="90px">
+        </div>
+        <div class="order-details">
+          <div class="order-number-label">Order ID</div>
+          <div class="order-number" style="font-size:20px;font-weight:600">{{order_id}}</div>
+        </div>
+        <div class="order-footer">Thank you!</div>
+      </div>
+      <div class="jagged-edge " style="margin-top:-9px"></div>
+    </div>
+  </div>
+</div></section>
+{% endifequal %}
+
+
+{%  ifequal result "failed" %}
+
+<section>
+<div class="container container_success mt-3">
+  <div class="printer-top"></div>
+    
+  <div class="paper-container">
+    <div class="printer-bottom"></div>
+
+    <div class="paper">
+      <div class="main-contents">
+        
+        <div class="success-title">
+          Payment Declined
+        </div>
+        <div class="success-description p-6">
+         <img src="{% static 'modmain/img/animation_500_kh27y6jn.gif' %}" alt="" width="150px">
+        </div>
+        {% comment %} <div class="order-details">
+          <div class="order-number-label">Order ID</div>
+          <div class="order-number" style="font-size:20px;font-weight:600">{{order_id}}</div>
+        </div>
+        <div class="order-footer">Thank you!</div> {% endcomment %}
+      </div>
+      <div class="jagged-edge " style="margin-top:-9px"></div>
+    </div>
+  </div>
+</div
+></section>
+
+
+
+{% endifequal %}
+
+{% endblock content %}

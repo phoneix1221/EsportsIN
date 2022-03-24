@@ -1,0 +1,25 @@
+{% extends 'modmain/base.html' %}
+{% load static %}
+{% block content %}
+{% load crispy_forms_tags %}
+
+<div class="container col-sm-6 " >
+
+<div class="card container-fluid p-4 card shadow border border-white bg-transparent" >
+
+    <div class="center">
+<h2 class="d-flex justify-content-center text-uppercase font-weight-bold text-light" id="mob_title" style="font-family:Anurati-Regular;"><span style="color: orange;">create </span> &nbsp; your team</h2></div>
+<form method="POST">
+            {% csrf_token %}
+            <fieldset class="form-group" style="font-weight: 500;color: white;">
+                {{ form|crispy }}
+            </fieldset>
+            <div class="form-group container">
+                <button class="btn  btn-block login-btn  rounded" type="submit"><span style="color:white;font-weight: 600;">Create Team</span></button>
+            </div>
+        </form>
+
+</div>
+</div>
+
+{% endblock content %}

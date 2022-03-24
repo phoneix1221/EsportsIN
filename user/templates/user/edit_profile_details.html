@@ -1,0 +1,56 @@
+{% extends 'modmain/base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block content %}
+<section id="regform">
+
+
+
+ <div class="container-fluid juked p-0">
+
+ 
+
+
+<div class="container pt-3">
+
+  <div class="row justify-content-sm-center ">
+    <div class="col-sm-8 col-md-5 login_form_margin" >
+
+      <div class="card cardreg border-info text-center p-0 " style="background-color:transparent">
+        <div class="card-header ">
+         <p class="h5 mt-1"style="color:white;font-family:Anurati-Regular">EDIT PROFILE DETAILS</p>
+        </div>
+        <div class="alert" style="background-color:transparent;color:red;font-size:20px" role="alert">
+  {% if messages %}
+            {% for message in messages %}  
+                {{ message }}
+            {% endfor %}
+{% endif %}
+</div>
+        <div class="card-body">
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <fieldset class="form-group" style="color:white;">
+                {{ form|crispy }}
+
+                {% for error in form.error  %}{% endfor %}
+            </fieldset>
+            <div class="form-group">
+                <button class="btn  btn-block login-btn " type="submit"><span style="color:white">Proceed</span></button>
+            </div>
+        </form>
+ </div>
+      </div>
+     
+    </div>
+  </div>
+</div>
+
+
+  </div>
+</div>
+</div>
+</section>
+
+{% endblock content %}

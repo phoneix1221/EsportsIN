@@ -1,0 +1,137 @@
+	{% extends 'modmain/base.html' %}
+  {% load crispy_forms_tags %}
+{% load static %}
+
+{% block content %}
+ 
+ 
+   
+
+<section>
+   <div class="card text-white  wallet_card border border-light wallet_main_div m-1" style="max-width: 100%;background-color:transparent;">
+  <div class="card-header mt-3" style="text-align:center"><span style="font-size:30px;font-family:Anurati-Regular">WALLET</span><br>
+  <span><img src="{% static 'modmain/img/5f44f3160a09b51b4fa4634ecdff62dd-money-icon-by-vexels.png' %}" alt="" width="100px" height:"110px"></span>
+  </div>
+  <div class="card-body card_body_of_wallet" style="padding:unset !important">
+  <div style="text-align:center">
+    <h5 class="card-title"><i class="fa fa-2x fa-rupee "></i><span style="font-size:34px;">  {{user.profile.wallet}}</span></h5></div>
+   <div style="text-align:center;padding:10px"><button class="btn border border-light m-3" style="background-color:black;min-width:150px;max-width:150px" data-toggle="modal" data-target="#exampleModal"><span style="color:white">Add Money</span></button> 
+   <button class="btn border border-light m-3"><span style="color:white;min-width:150px;max-width:150px">Transfer To Bank</span></button>
+   </div>
+  </div>
+
+   <div class="container-fluid">
+    
+    <div class="row mt-4">
+   <div class="col-md-12">
+    <p style="font-weight:990;text-align:center;font-size:24px;font-family:Anurati-Regular;text-transform:uppercase">Transaction History</p>
+   </div>
+   </div>
+    
+   <div class="schedule_match match  p-3 mb-4 container" style="border-style: solid;border-color: white;">
+    
+     <div class="row">
+     
+       <div class="col-md-5 nk mb-1"style="color:white">Order ID</div>
+     <div class="col-md-2 nm mb-1" style="color:white" >Amount</div>
+     <div class="col-md-3 nn mb-1" style="color:white">Date</div>
+     <div class="col-md-2 nj mb-1 " style="color:white">Status</div>
+  
+    
+     </div>    
+     </div>
+
+
+
+     {% for obj in trasnscation %}
+     
+     <div class="schedule_match match  p-3 mb-4 container" style="border-style: solid;border-color: white;">
+    
+     <div class="row">
+     
+       <div class="col-md-5 nk mb-1">{{obj.order_id}}</div>
+     <div class="col-md-2 nm mb-1" style="color:white" >{{obj.amount}}</div>
+     <div class="col-md-3 nn mb-1" style="color:white">{{obj.date_of_transcation}}</div>
+     {% if obj.payment_id %}
+     <div class="col-md-2 nj mb-1 " style="color:lightgreen">Added to wallet</div>
+     {% else %}
+      <div class="col-md-2 nj mb-1 ">Transcation Failed</div>
+     {% endif %}
+     </div>    
+     </div>
+
+     {% endfor %}
+
+    
+</div>
+</section>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog border border-white" role="document" >
+    <div class="modal-content">
+      <div class="modal-header " style="background-color:black">
+        <h5 class="modal-title font-weight-bold" id="exampleModalLabel"><span style="color:white;font-weight:500">Enter Amount</span></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color:white">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body  p-4"  style="background-color:black">
+        <form method="POST">
+            {% csrf_token %}
+           <fieldset class="form-group p-3" style="color:white;font-weight:600">
+                {{ form|crispy }}
+
+                {% for error in form.error  %}{% endfor %}
+            </fieldset>
+  <div class="modal-footer"  style="background-color:black">
+        <button type="button" class="btn btn-danger font-weight-bold" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-success font-weight-bold">Add Money</button>
+      </div>
+</form>
+      </div>
+      
+    </div>
+  </div>
+</div>
+{% if payment %}
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+var options = {
+    "key": "rzp_test_9Ic6xTsM7UI2yT", // Enter the Key ID generated from the Dashboard
+    "amount": "{{payment.amount}}", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+    "currency": "INR",
+    "name": "NukeFusion",
+    "description": "Add amount",
+    "image": "{% static 'modmain/img/mylogo.png' %}",
+    "order_id": "{{payment.id}}", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+    "callback_url": "{% url 'addmoneysuccess' %}",
+    //"redirect": true,
+    "prefill": {
+        "name": "{{user.username}}",
+        "email": "{{user.email}}",
+        "contact": "{{user.profile.phone_number}}>"
+    },
+    "notes": {
+        "address": "Razorpay Corporate Office"
+    },
+    "theme": {
+        "color": "#000000"
+    }
+};
+console.log(options)
+var rzp1 = new Razorpay(options);
+{% comment %} document.getElementById('rzp-button1').onclick = function (e) {
+    rzp1.open();
+    e.preventDefault();
+} {% endcomment %}
+rzp1.open();
+e.preventDefault();
+</script>
+{% endif %}
+
+
+
+{% endblock content %}
